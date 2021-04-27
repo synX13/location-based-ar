@@ -18,7 +18,6 @@ function loadPlaces(position) {
         &client_secret=${params.clientSecret}
         &limit=30 
         &v=${params.version}`;
-        console.log(endpoint)
     return fetch(endpoint)
         .then((res) => {
             return res.json()
@@ -31,6 +30,7 @@ function loadPlaces(position) {
         })
 };
 
+
 window.onload = () => {
     const scene = document.querySelector('a-scene');
 
@@ -38,10 +38,12 @@ window.onload = () => {
     return navigator.geolocation.getCurrentPosition(function (position) {
 
         // than use it to load from remote APIs some places nearby
-        loadPlaces(position.coords)
+        // -7.800799,110.304699
+        // -7.7896843,110.3537139
+        loadPlaces({latitude:-7.7896843,longitude:110.3537139})
             .then((places) => {
-                document.getElementById("tabel_lokasi");
-        console.log(places)
+                
+            console.log(places)
                 places.forEach((place) => {
                     const latitude = place.location.lat;
                     const longitude = place.location.lng;
